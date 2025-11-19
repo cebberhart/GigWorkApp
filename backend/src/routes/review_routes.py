@@ -1,14 +1,10 @@
-from flask import Blueprint
+from flask import Blueprint, request
+from src.controllers.review_controller import create_review
+from src.middleware.auth_middleware import token_required
 
-#Blueprint - for review-relaed routes
 review_blueprint = Blueprint('reviews', __name__)
 
-@review_blueprint.route('/', methods=['GET'])
-def list_reviews():
-    #Response placeholder
-    return {"message": "List reviews endpoint placeholder"}
-
-@review_blueprint.route('/', methods=['POST'])
-def create_review():
-    #Response placeholder
-    return {"message": "Create review endpoint placeholder"}
+@review_blueprint.route('', methods=['POST'])
+@token_required
+def create_review_route():
+    return create_review(request.user_id)
