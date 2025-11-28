@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post a Gig | GigWork</title>
+  <link rel="stylesheet" href="GigWorkStyle.css">
+</head>
+<body>
+
+<header>
+<a href="GWDash.html" class="back-arrow">&#8592;</a>
+<h1><span>Gig</span>Work</h1>
+</header>
+
+<main class="post-gig-container">
+  <h2>Post a New Gig</h2>
+
+  <form onsubmit="event.preventDefault(); location.href='viewapplications.html'">
+  
+    <label>Gig Title:</label>
+    <input type="text" required placeholder="Example: Paint my living room">
+
+    <label>Description:</label>
+    <textarea rows="4" required placeholder="Describe the task..."></textarea>
+
+    <label>Pay Amount ($):</label>
+    <input type="number" required>
+
+    <label>Location:</label>
+    <input type="text" required placeholder="Detroit, MI">
+
+    <label>Due Date:</label>
+    <input type="date" required>
+
+    <button type="submit">Post Gig</button>
+  </form>
+</main>
+
+
+ <!-- ===== Bottom Navigation Bar ===== -->
+<nav class="bottom-nav">
+ <a href="GWRole.html" class="active">🏠<br><span>Home</span></a>
+  <a href="GWProfile.html">👤<br><span>Profile</span></a>
+  
+</nav>
+</body>
+</html>
