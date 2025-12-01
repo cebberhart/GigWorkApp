@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Dashboard - GigWork</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='GigWorkStyle.css') }}">
+  </head>
+  <body>
+    <script>
+      // Redirect to login if not authenticated
+      if (!localStorage.getItem('token')) {
+      window.location.href = '/';
+      }
+    </script>
+    <header>
+      <h1><span>Gig</span>Work</h1>
+    </header>
+
+
+    <main>
+      <h2>Client Dashboard</h2>
+      
+      <div class="dashboard-cards">
+        <div class="dashboard-card green">
+          <p>4<br><small>Active Gigs</small></p>
+        </div>
+        <div class="dashboard-card blue">
+          <p>3<br><small>Applications</small></p>
+        </div>
+      </div>
+
+      <a href="/post-gig"> <button class="btn">POST NEW GIG</button></a>
+      <a href="/viewapp"> <button class="btn">CHECK APPLICATIONS</button></a>
+      <a href="/my-posted-gigs"> <button class="btn">ACTIVE GIGS</button></a>
+
+      <h3 style="margin: 1.5rem 0 1rem;">Recent Gigs</h3>
+
+      <div class="gig-list">
+        <div class="gig">
+          <h4>Dog Walking Service</h4>
+          <small>Downtown • Posted 2 hours ago</small>
+          <span>$20/hour</span>
+        </div>
+
+        <div class="gig">
+          <h4>Help Moving Furniture</h4>
+          <small>Midtown • Posted 1 day ago</small>
+          <span>$150 total</span>
+        </div>
+      </div>
+      
+      <button class="btn logout-btn" onclick="logout()">LOGOUT</button>
+    </main>
+
+    <nav class="bottom-nav">
+      <a href="/" class="active">🏠<br><span>Home</span></a>
+      <a href="/profile">👤<br><span>Profile</span></a>
+    </nav>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+  </body>
+</html>

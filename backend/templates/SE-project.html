@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GigWork</title>
+  <style>
+    /* ===== RESET & BASE STYLES ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background: linear-gradient(180deg, #f2f4f7, #e8ebee);
+      background-image: url('https://www.transparenttextures.com/patterns/white-wall.png'); /* optional subtle texture */
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      color: #222;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      width: 100%;
+      background-color: #222;
+      color: #3fdae3;
+      text-align: left;
+      padding: 1rem;
+      font-weight: 600;
+      font-size: 1.2rem;
+    }
+
+    header span {
+      color: #71ee7c; /* green accent for "Gig" */
+    }
+
+    /* ===== MAIN SECTION ===== */
+    main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 2rem 1rem;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    main h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    main p {
+      font-size: 1rem;
+      color: #555;
+      line-height: 1.5;
+      margin-bottom: 2rem;
+      font-weight: bold;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 0.9rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      background-color: #000;
+      color: #fff;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #333;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 0.8rem;
+      background-color: #111;
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 600px) {
+      main {
+        max-width: 480px;
+      }
+      main h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span>Gig</span>Work
+  </header>
+
+  <main>
+    <h1>Find Work.<br>Get Help.</h1>
+    <p>Connect with local opportunities and skilled workers in your area.</p>
+    <button class="btn">REGISTER</button>
+    <button class="btn">LOG IN</button>
+  </main>
+
+  <footer>
+    <a href="#">gigwork.com</a>
+  </footer>
+</body>
+</html>

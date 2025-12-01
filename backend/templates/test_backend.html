@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Backend Test</title>
+</head>
+<body>
+<h1>Gig Work App Backend Test</h1>
+
+<h2>Register</h2>
+<form id="registerForm">
+    Email: <input type="email" name="email" required><br>
+    Password: <input type="password" name="password" required><br>
+    Role:
+    <select name="role">
+        <option value="Client">Client</option>
+        <option value="Worker">Worker</option>
+    </select><br>
+    <button type="submit">Register</button>
+</form>
+<p id="registerResponse"></p>
+
+
+<h2>Login</h2>
+<form id="loginForm">
+    Email: <input type="email" name="email" required><br>
+    Password: <input type="password" name="password" required><br>
+    <button type="submit">Login</button>
+</form>
+<p id="loginResponse"></p>
+
+<!-- Protected Test Button -->
+<h2>Protected Test</h2>
+<button id="protectedBtn">Test JWT Protected Route</button>
+<p id="protectedResponse"></p>
+
+<script>
+let jwtToken = "";
+
+// Register
+document.getElementById('registerForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = {
+        email: form.email.value,
+        password: form.password.value,
+        role: form.role.value
+    };
+    const res = await fetch('http://127.0.0.1:5000/auth/register', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    });
+    const result = await res.json();
+    document.getElementById('registerResponse').innerText = JSON.stringify(result);
+});
+
+// Login
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = {
+        email: form.email.value,
+        password: form.password.value
+    };
+    const res = await fetch('http://127.0.0.1:5000/auth/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    });
+    const result = await res.json();
+    document.getElementById('loginResponse').innerText = JSON.stringify(result);
+    if (result.token) jwtToken = result.token;
+});
+
+// Protected Test
+document.getElementById('protectedBtn').addEventListener('click', async () => {
+    if (!jwtToken) {
+        alert("Please login first to get a token!");
+        return;
+    }
+    const res = await fetch('http://127.0.0.1:5000/gigs/', {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + jwtToken
+        }
+    });
+    const result = await res.json();
+    document.getElementById('protectedResponse').innerText = JSON.stringify(result);
+});
+</script>
+</body>
+</html>
+
+<!-- Test HTML page for backend testing - just temporary - had some help from ChatGPT with this page just so i could test backend logic-->

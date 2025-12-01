@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Applications | GigWork</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='GigWorkStyle.css') }}">
+</head>
+<body>
+
+<header>
+  <a href="/dash" class="back-arrow">&#8592;</a>
+  <h1><span>Gig</span>Work</h1>
+</header>
+
+<main class="applications-container">
+  <h2>Applications to Your Gigs</h2>
+
+  <!-- This div will be filled with real applications from database -->
+  <div id="applications-list">
+    <p style="text-align:center; color: #666;">Loading applications...</p>
+  </div>
+
+</main>
+
+ <!-- ===== Bottom Navigation Bar ===== -->
+<nav class="bottom-nav">
+ <a href="/" class="active">🏠<br><span>Home</span></a>
+  <a href="G/profile">👤<br><span>Profile</span></a>
+</nav>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+// Load applications when page loads
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadClientApplications();
+});
+
+async function getClientApplications() {
+  try {
+    const response = await fetch('/applications', {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      }
+    });
+    const data = await response.json();
+    return data.applications || [];
+  } catch (err) {
+    console.error('Error fetching applications:', err);
+    return [];
+  }
+}
+
+async function loadClientApplications() {
+  const applications = await getClientApplications();
+  displayClientApplicationsOnPage(applications);
+}
+
+function displayClientApplicationsOnPage(applications) {
+  const container = document.getElementById('applications-list');
+  
+  if (!container) return;
+  
+  container.innerHTML = '';
+
+  if (applications.length === 0) {
+    container.innerHTML = `
+      <div style="text-align:center; padding: 40px;">
+        <p style="color: #666; font-size: 1.1rem;">No applications yet</p>
+        <p style="color: #999;">Workers will apply to your posted gigs</p>
+      </div>
+    `;
+    return;
+  }
+
+  applications.forEach(app => {
+    const appCard = document.createElement('div');
+    appCard.className = 'application-card';
+    
+    // Determine status styling
+    let statusStyle = '';
+    if (app.status === 'accepted') {
+      statusStyle = 'color: green; font-weight: bold;';
+    } else if (app.status === 'rejected') {
+      statusStyle = 'color: red; font-weight: bold;';
+    } else {
+      statusStyle = 'color: orange; font-weight: bold;';
+    }
+    
+    appCard.innerHTML = `
+      <h3>${app.worker_name || 'Worker'}</h3>
+      <p><strong>Gig:</strong> ${app.gig_title || `Gig ID: ${app.gig_id}`}</p>
+      <p><strong>Status:</strong> <span style="${statusStyle}">${app.status.toUpperCase()}</span></p>
+      <p><strong>Message:</strong> ${app.message || 'No message provided'}</p>
+      <p style="color: #666; font-size: 0.9rem;">Applied: ${new Date(app.created_at).toLocaleDateString()}</p>
+      
+      ${app.status === 'pending' ? `
+        <div class="action-row">
+          <button class="accept" onclick="handleAcceptApplication(${app.id})">Accept</button>
+          <button class="decline" onclick="handleDeclineApplication(${app.id})">Decline</button>
+        </div>
+      ` : ''}
+    `;
+    
+    container.appendChild(appCard);
+  });
+}
+
+async function acceptApplication(applicationId) {
+  try {
+    const response = await fetch(`/applications/${applicationId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      },
+      body: JSON.stringify({ status: 'accepted' })
+    });
+    const result = await response.json();
+    if (response.ok) {
+      return result;
+    } else {
+      alert(result.error || 'Failed to accept application');
+      return null;
+    }
+  } catch (err) {
+    console.error('Error updating application:', err);
+    alert('Error updating application');
+    return null;
+  }
+}
+
+async function declineApplication(applicationId) {
+  try {
+    const response = await fetch(`/applications/${applicationId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + localStorage.getItem('token')
+      },
+      body: JSON.stringify({ status: 'rejected' })
+    });
+    const result = await response.json();
+    if (response.ok) {
+      return result;
+    } else {
+      alert(result.error || 'Failed to decline application');
+      return null;
+    }
+  } catch (err) {
+    console.error('Error updating application:', err);
+    alert('Error updating application');
+    return null;
+  }
+}
+
+async function handleAcceptApplication(applicationId) {
+  const confirmed = confirm('Accept this application?');
+  if (!confirmed) return;
+  
+  const result = await acceptApplication(applicationId);
+  
+  if (result) {
+    // Reload applications to show updated status
+    await loadClientApplications();
+  }
+}
+
+async function handleDeclineApplication(applicationId) {
+  const confirmed = confirm('Decline this application?');
+  if (!confirmed) return;
+
+  const result = await declineApplication(applicationId); // call the new function
+  if (result) {
+    await loadClientApplications(); // refresh the list
+  }
+}
+
+</script>
+
+</body>
+</html>
