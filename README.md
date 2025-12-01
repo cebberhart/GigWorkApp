@@ -64,8 +64,8 @@ Frontend can be accessed via your browser or live server.
 
 ## Documentation
 
-- [Software Requirements Specification (SRS)](./docs/SRS.md) - Full requirements
-- [Project Management Plan (SPMP)](./docs/SPMP.md) - Timeline & planning
+- [Software Requirements Specification (SRS)](docs/Gig_Work_App_SRS.pdf) - Full requirements
+- [Software Design Document (SDD)](docs/Gig_Work_App_SDD.pdf) - Timeline & planning
 - [API Documentation](./docs/API.md) - Endpoint reference
 
 ## Team
