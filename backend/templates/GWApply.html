@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply | GigWork</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='GigWorkStyle.css') }}">
+</head>
+<body>
+  <header>
+    <a href="/gig-details" class="back-arrow">&#8592;</a>
+    <h1><span>Gig</span>Work</h1>
+  </header>
+
+  <main class="apply-container">
+    <h2>Apply for this Gig</h2>
+    <form onsubmit="event.preventDefault(); location.href='/complete'">
+      <label>Name:</label>
+      <input type="text" required>
+
+      <label>Experience / Message:</label>
+      <textarea rows="4" required></textarea>
+
+      <a href="/complete"><button type="submit">Submit Application</button></a>
+    </form>
+  </main>
+
+   <!-- ===== Bottom Navigation Bar ===== -->
+<nav class="bottom-nav">
+ <a href="/" class="active">🏠<br><span>Home</span></a>
+  <a href="/profile">👤<br><span>Profile</span></a>
+</nav>
+
+</body>
+</html>

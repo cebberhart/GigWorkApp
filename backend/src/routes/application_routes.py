@@ -4,7 +4,7 @@ from src.controllers.application_controller import (
     get_applications,
     get_application,
     update_application,
-    delete_application
+    delete_application,
 )
 from src.middleware.auth_middleware import token_required
 
@@ -34,3 +34,4 @@ def update_application_route(app_id):
 @token_required
 def delete_application_route(app_id):
     return delete_application(request.user_id, app_id)
+

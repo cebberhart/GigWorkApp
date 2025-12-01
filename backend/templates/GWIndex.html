@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GigWork</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='GigWorkStyle.css') }}">
+  </head>
+  <body>
+    <header>
+      <h1><span>Gig</span>Work</h1>
+    </header>
+
+    <main>
+      <h1>Find Work.<br>Get Help.</h1>
+      
+      <br>
+        <div class="inspiring-hook">
+          <p>Connect with local <br>opportunities and skilled <br>workers in your area.</p>
+        </div>
+      <br>
+
+      <button class="btn" onclick="window.location.href='/register'">REGISTER</button>
+      <button class="btn" onclick="window.location.href='/login'">LOG IN</button>
+    </main>
+
+    <footer>
+      <a href="/">gigwork.com</a>
+    </footer>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+  </body>
+</html>

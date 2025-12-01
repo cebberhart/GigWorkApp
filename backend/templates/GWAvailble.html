@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Available Gigs | GigWork</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='GigWorkStyle.css') }}">
+</head>
+<body>
+
+<script>
+if (!localStorage.getItem('token')) {
+  window.location.href = '/login';
+}
+</script>
+
+<header>
+  <a href="/worker-dash" class="back-arrow">&#8592;</a>
+  <h1><span>Gig</span>Work</h1>
+</header>
+
+<main class="gigs-container">
+  <h2>Available Gigs</h2>
+
+  <div id="gigsContainer"></div>
+</main>
+
+<nav class="bottom-nav">
+  <a href="/" class="active">🏠<br><span>Home</span></a>
+  <a href="/profile">👤<br><span>Profile</span></a>
+</nav>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+// Load gigs when page loads
+document.addEventListener('DOMContentLoaded', async () => {
+  const gigs = await fetchGigs();
+  displayAvailableGigs(gigs);
+});
+
+function displayAvailableGigs(gigs) {
+  const container = document.getElementById('gigsContainer');
+  
+  if (!gigs || gigs.length === 0) {
+    container.innerHTML = '<p style="text-align: center; padding: 20px;">No gigs available right now</p>';
+    return;
+  }
+
+  container.innerHTML = gigs.map(gig => `
+    <div class="gig-card">
+      <h3>${gig.title}</h3>
+      <p>${gig.location} · $${gig.payment} · Status: ${gig.status}</p>
+      <p style="font-size: 0.9rem; color: #666;">Posted: ${new Date(gig.created_at).toLocaleDateString()}</p>
+      <button class="btn" onclick="applyForGig(${gig.id})">Apply Now</button>
+    </div>
+  `).join('');
+}
+</script>
+
+</body>
+</html>

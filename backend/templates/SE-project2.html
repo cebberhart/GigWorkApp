@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GigWork - Choose Role</title>
+  <style>
+    /* ===== RESET & BASE ===== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', Arial, sans-serif;
+      background-color: #f8f9fb;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 100vh;
+      color: #111;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+      width: 100%;
+      background-color: #222;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+
+    header h1 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #3fdae3;
+    }
+
+    header span {
+      color: #1be974;
+    }
+
+    .back-arrow {
+      font-size: 1.5rem;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    main {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      width: 100%;
+      padding: 2rem 1rem;
+      max-width: 400px;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ===== ROLE CARDS ===== */
+    .role-card {
+      width: 100%;
+      background-color: #3fdae3;
+      border-radius: 16px;
+      padding: 2rem 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      border: 2px solid black;
+    }
+
+    .role-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .role-card h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .role-card p {
+      font-size: 1rem;
+      color: #222;
+      line-height: 1.4;
+    }
+
+    .green-card {
+      background-color: #71ee7c;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      width: 100%;
+      text-align: center;
+      padding: 0.8rem;
+      background-color: #111;
+      color: white;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: white;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <a href="/" class="back-arrow">&#8592;</a>
+    <h1><span>Gig</span>Work</h1>
+    <div style="width: 24px;"></div> <!-- keeps spacing balanced -->
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <h2>Choose Your Role</h2>
+
+    <div class="role-card">
+      <h3>I need help</h3>
+      <p>Post gigs and hire skilled workers for your tasks</p>
+    </div>
+
+    <div class="role-card green-card">
+      <h3>I want work</h3>
+      <p>Find gigs and earn money with your skills</p>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <a href="#">gigwork.com/chooserole</a>
+  </footer>
+</body>
+</html>

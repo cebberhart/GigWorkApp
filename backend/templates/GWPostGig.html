@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Post a Gig | GigWork</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='GigWorkStyle.css') }}">
+</head>
+<body>
+
+<header>
+<a href="/dash" class="back-arrow">&#8592;</a>
+<h1><span>Gig</span>Work</h1>
+</header>
+
+<main class="post-gig-container">
+  <h2>Post a New Gig</h2>
+
+  <form id="post-gig-form" onsubmit="handlePostGig(event)">
+  
+    <label>Gig Title:</label>
+    <input type="text" id="gig-title" required placeholder="Example: Paint my living room">
+
+    <label>Description:</label>
+    <textarea id="gig-description" rows="4" required placeholder="Describe the task..."></textarea>
+
+    <label>Pay Amount ($):</label>
+    <input type="number" id="gig-payment" required>
+
+    <label>Location:</label>
+    <input type="text" id="gig-location" required placeholder="Detroit, MI">
+
+    <label>Category:</label>
+    <input type="text" id="gig-category" required placeholder="Example: Home Improvement">
+
+    <button type="submit">Post Gig</button>
+  </form>
+</main>
+
+ <!-- ===== Bottom Navigation Bar ===== -->
+<nav class="bottom-nav">
+ <a href="/" class="active">🏠<br><span>Home</span></a>
+  <a href="/profile">👤<br><span>Profile</span></a>
+</nav>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<script>
+async function handlePostGig(e) {
+  e.preventDefault();
+  
+  const title = document.getElementById('gig-title').value;
+  const description = document.getElementById('gig-description').value;
+  const payment = document.getElementById('gig-payment').value;
+  const location = document.getElementById('gig-location').value;
+  const category = document.getElementById('gig-category').value;
+  
+  const result = await createGig(title, description, location, payment, category);
+  
+  if (result) {
+    // Clear the form
+    document.getElementById('post-gig-form').reset();
+    // Redirect to view applications page
+    setTimeout(() => {
+      window.location.href = '/viewapp';
+    }, 1500);
+  }
+}
+</script>
+
+</body>
+</html>
