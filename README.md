@@ -2,10 +2,6 @@
 
 A local gig jobs platform connecting clients with workers for short-term opportunities.
 
-[![Status](https://img.shields.io/badge/Status-In%20Development-yellow)]()
-[![Backend](https://img.shields.io/badge/Backend-Python%20%7C%20Flask-green)]()
-[![Frontend](https://img.shields.io/badge/Frontend-HTML%20%7C%20CSS%20%7C%20JS-blue)]()
-
 ## About
 
 The Gig Work App is a web-based platform that connects people offering short-term work (clients) with people seeking work (workers). Users can post gigs, browse opportunities, apply for jobs, and build credibility through reviews and badges.
